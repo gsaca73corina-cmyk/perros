@@ -207,7 +207,7 @@ function createVegetation() {
                 mesh: tree,
                 x: position.x,
                 z: position.z,
-                radius: treeType.leafRadius + 0.4
+                radius: treeType.leafRadius * 0.7
             });
             scene.add(tree);
         }
@@ -251,7 +251,7 @@ function createBushes() {
                 mesh: bushGroup,
                 x: position.x,
                 z: position.z,
-                radius: bushSize + 0.12
+                radius: bushSize * 0.8
             });
             scene.add(bushGroup);
         }
@@ -404,7 +404,7 @@ function initDogState() {
         acceleration: 0.06,
         deceleration: 0.08,
         turnSpeed: 0.04,
-        radius: 0.4,
+        radius: 0.3,
         isRunning: false,
         foundMaster: false,
         cinematicMode: false,
