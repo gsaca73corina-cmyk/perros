@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Encuentra a tu Amo - Aventura Nocturna</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loading">Cargando aventura nocturna...<br>Por favor, espera unos segundos.</div>
+    
+    <!-- Pantalla de marca GUNAR -->
+    <div id="brandScreen" class="instruction-screen">
+        <div class="brand-content">
+            <h1 class="brand-title">GUNAR</h1>
+            <p class="brand-subtitle">Experiencias Interactivas</p>
+        </div>
+    </div>
+    
+    <!-- Pantalla de bienvenida -->
+    <div id="welcomeScreen" class="instruction-screen" style="display: none;">
+        <h1 class="instruction-title">🐕 Encuentra a tu Amo 🌙</h1>
+        <div class="instruction-content">
+            <p>Eres un perrito perdido en la oscuridad de la noche.</p>
+            <p>Tu amo está en algún lugar del bosque esperándote.</p>
+            <p>¡Usa tu olfato y determinación para encontrarlo!</p>
+        </div>
+        <button class="continue-button" onclick="showControls()">Continuar</button>
+    </div>
+    
+    <!-- Pantalla de controles -->
+    <div id="controlsScreen" class="instruction-screen" style="display: none;">
+        <h2 class="instruction-title">📱 Controles</h2>
+        <div class="instruction-content">
+            <p><strong>En PC:</strong></p>
+            <p>← → : Girar izquierda/derecha</p>
+            <p>↑ : Correr rápido</p>
+            <p>↓ : Caminar lento</p>
+            <br>
+            <p><strong>En Móvil:</strong></p>
+            <p>Toca la pantalla para correr hacia donde tocas</p>
+            <p>Mantén presionado para correr más rápido</p>
+        </div>
+        <button class="continue-button" onclick="showGameplay()">Siguiente</button>
+    </div>
+    
+    <!-- Pantalla de mecánicas de juego -->
+    <div id="gameplayScreen" class="instruction-screen" style="display: none;">
+        <h2 class="instruction-title">🎯 Cómo Jugar</h2>
+        <div class="instruction-content">
+            <p><strong>Tu Objetivo:</strong> Encontrar a tu amo siguiendo la flecha dorada</p>
+            <br>
+            <p><strong>Evita:</strong> Chocar con árboles y arbustos (te ralentizan) y perros enemigos rojos (¡terminan el juego!)</p>
+            <p><strong>Usa:</strong> Los senderos del bosque para moverte más rápido</p>
+            <p><strong>Observa:</strong> La distancia en el panel - mientras más cerca, mejor</p>
+        </div>
+        <button class="continue-button" onclick="showTips()">Siguiente</button>
+    </div>
+    
+    <!-- Pantalla de consejos -->
+    <div id="tipsScreen" class="instruction-screen" style="display: none;">
+        <h2 class="instruction-title">💡 Consejos</h2>
+        <div class="instruction-content">
+            <p><strong>🏃♂️ Velocidad:</strong> Corre rápido en espacios abiertos, camina lento cerca de obstáculos</p>
+            <br>
+            <p><strong>🧭 Navegación:</strong> La flecha dorada siempre apunta hacia tu amo</p>
+            <p><strong>🌙 Luz:</strong> Tu amo tiene una luz que brilla en la distancia</p>
+            <p><strong>⏱️ Tiempo:</strong> No hay límite de tiempo, tómate tu tiempo</p>
+            <p><strong>🔴 Dificultad:</strong> Cada nivel completado agrega más perros enemigos rojos</p>
+        </div>
+        <button class="continue-button" onclick="startGame()">¡Empezar Aventura!</button>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+    <div id="impactEffect"></div>
+    <div id="victoryMessage">¡Encontraste a tu amo! 🐕❤️</div>
+    
+    <!-- Pantalla de game over -->
+    <div id="gameOverScreen" class="instruction-screen" style="display: none; background: rgba(0,0,0,0.8);">
+        <div class="ending-content">
+            <h1 style="color: #FF4444; font-size: 48px; margin-bottom: 30px;">💔</h1>
+            <p style="color: #FF4444; font-size: 24px; margin-bottom: 20px;">No llegaste a tiempo...</p>
+            <p style="color: #CCCCCC; font-size: 18px;">Los perros enemigos te detuvieron en tu búsqueda</p>
+            <div class="ending-stats">
+                <p>Tiempo sobrevivido: <span id="gameOverTime"></span></p>
+                <p>Nivel: <span id="gameOverLevel"></span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pantalla de frases finales -->
+    <div id="endingScreen" class="instruction-screen" style="display: none; background: rgba(0,0,0,0.3); backdrop-filter: blur(8px);">
+        <div class="ending-content">
+            <p class="ending-phrase" id="endingPhrase"></p>
+            <div class="ending-stats">
+                <p>Tiempo: <span id="finalTime"></span></p>
+                <p id="levelInfo">Nivel completado: <span id="currentLevel"></span></p>
+                <p id="enemyInfo">Perros enemigos evitados: <span id="enemyCount"></span></p>
+                <p>Puntuación Total: <span id="totalScoreDisplay"></span></p>
+                <p>Reuniones: <span id="totalReunionsDisplay"></span></p>
+                <p>Mejor Tiempo: <span id="bestTimeDisplay"></span></p>
+                <p>Racha Máxima: <span id="maxStreakDisplay"></span></p>
+                <p>Una historia de amor incondicional</p>
+
+            </div>
+        </div>
+    </div>
+    <div id="achievementNotification" style="position: absolute; top: 80px; left: 50%; transform: translateX(-50%); background: rgba(255,215,0,0.9); color: #000; padding: 10px 20px; border-radius: 20px; font-weight: bold; display: none; z-index: 100; animation: bounce 0.5s ease-in-out;">🏆 ¡Logro Desbloqueado!</div>
+    <div id="directionIndicator">Busca a tu amo en la oscuridad</div>
+    <div id="masterArrow">↑</div>
+    <div id="timer">Tiempo: 0:00</div>
+    <div id="controls" style="display: none;">
+        PC: ← → : Girar | ↑ : Correr | ↓ : Caminar lento<br>
+        Móvil: Toca donde quieres ir
+    </div>
+    <div id="dashboard">
+        <div class="gauge">
+            <div>Velocidad</div>
+            <div id="speedValue">0 km/h</div>
+        </div>
+        <div class="gauge">
+            <div>Dirección</div>
+            <div id="directionValue">0°</div>
+        </div>
+        <div class="gauge">
+            <div>Distancia</div>
+            <div id="distanceValue">0 m</div>
+        </div>
+        <div class="gauge">
+            <div>Puntos</div>
+            <div id="scoreValue">0</div>
+        </div>
+        <div class="gauge">
+            <div>Racha</div>
+            <div id="streakValue">0</div>
+        </div>
+    </div>
+    
+
+
+    <audio id="backgroundMusic" loop>
+        <source src="Quien te cuide.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="dingSound">
+        <source src="DING.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="ghostMusic" preload="auto">
+        <source src="Quien te cuide.mp3" type="audio/mpeg">
+    </audio>
+    
+
+    
+
+
+    <script src="js/gameState.js"></script>
+    <script src="js/models.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/controls.js"></script>
+
+    <script src="js/endingPhrases.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
