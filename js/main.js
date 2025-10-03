@@ -61,11 +61,13 @@ function updateDog() {
         dogState.speed = Math.min(dogState.speed + dogState.acceleration, dogState.maxSpeed);
         dogState.isRunning = true;
     } else if (input.brake) {
-        dogState.speed = Math.max(dogState.speed - dogState.acceleration * 1.8, 0);
+        dogState.speed = Math.max(dogState.speed - dogState.acceleration * 2, -dogState.maxSpeed * 0.5);
         dogState.isRunning = false;
     } else {
         if (dogState.speed > 0) {
             dogState.speed = Math.max(dogState.speed - dogState.deceleration, 0);
+        } else if (dogState.speed < 0) {
+            dogState.speed = Math.min(dogState.speed + dogState.deceleration, 0);
         }
         dogState.isRunning = false;
     }

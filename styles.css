@@ -21,6 +21,63 @@ body {
     z-index: 1;
 }
 
+/* Controles móviles sutiles */
+.mobile-controls {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 150;
+    width: 80px;
+    height: 80px;
+    display: block;
+}
+
+.control-dot {
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.control-dot:active {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+#leftDot {
+    left: 0;
+    top: 32px;
+}
+
+#upDot {
+    left: 32px;
+    top: 0;
+}
+
+#downDot {
+    left: 32px;
+    top: 64px;
+}
+
+#rightDot {
+    left: 64px;
+    top: 32px;
+}
+
+/* Ocultar en PC */
+@media (min-width: 769px) {
+    .mobile-controls {
+        display: none;
+    }
+}
+
 #loading {
     position: absolute;
     top: 50%;

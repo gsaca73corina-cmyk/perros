@@ -38,8 +38,8 @@
             <p>↓ : Caminar lento</p>
             <br>
             <p><strong>En Móvil:</strong></p>
-            <p>Toca la pantalla para correr hacia donde tocas</p>
-            <p>Mantén presionado para correr más rápido</p>
+            <p>Usa los 4 puntitos blancos en la esquina inferior derecha</p>
+            <p>← → : Girar | ↑ : Correr | ↓ : Caminar lento</p>
         </div>
         <button class="continue-button" onclick="showGameplay()">Siguiente</button>
     </div>
@@ -113,6 +113,14 @@
         PC: ← → : Girar | ↑ : Correr | ↓ : Caminar lento<br>
         Móvil: Toca donde quieres ir
     </div>
+    <!-- Controles táctiles sutiles -->
+    <div class="mobile-controls">
+        <div class="control-dot" id="leftDot"></div>
+        <div class="control-dot" id="upDot"></div>
+        <div class="control-dot" id="downDot"></div>
+        <div class="control-dot" id="rightDot"></div>
+    </div>
+    
     <div id="dashboard">
         <div class="gauge">
             <div>Velocidad</div>
