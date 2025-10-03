@@ -21,61 +21,69 @@ body {
     z-index: 1;
 }
 
-/* Controles móviles sutiles */
+/* Controles móviles centrados y grandes */
 .mobile-controls {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 150;
-    width: 80px;
-    height: 80px;
-    display: block;
+    width: 180px;
+    height: 180px;
+    display: block !important;
 }
 
 .control-dot {
-    width: 16px;
-    height: 16px;
-    background: rgba(255, 255, 255, 0.6);
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    width: 9px;
+    height: 9px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 50%;
     position: absolute;
     cursor: pointer;
     transition: all 0.2s ease;
     user-select: none;
     touch-action: manipulation;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.control-dot:active {
-    background: rgba(255, 255, 255, 0.9);
-    transform: scale(1.3);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.control-dot::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.control-dot:active,
+.control-dot:hover {
+    background: rgba(255, 215, 0, 0.9);
+    border-color: rgba(255, 215, 0, 1);
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
 }
 
 #leftDot {
     left: 0;
-    top: 32px;
+    top: 70px;
 }
 
 #upDot {
-    left: 32px;
+    left: 70px;
     top: 0;
 }
 
 #downDot {
-    left: 32px;
-    top: 64px;
+    left: 70px;
+    top: 140px;
 }
 
 #rightDot {
-    left: 64px;
-    top: 32px;
-}
-
-/* Ocultar en PC */
-@media (min-width: 769px) {
-    .mobile-controls {
-        display: none;
-    }
+    left: 140px;
+    top: 70px;
 }
 
 #loading {
